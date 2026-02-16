@@ -19,3 +19,5 @@ After 3+ players join, a random winner is automatically picked and receives the 
 3. When 3+ players → randomness requested
 4. Winner picked → prize assigned to their pending withdrawal
 5. Winner calls `withdrawPrize()`
+
+# of course this is just a learning project, should not be used in production
