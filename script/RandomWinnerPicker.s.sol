@@ -5,18 +5,17 @@ import {RandomWinnerPicker} from "../src/RandomWinnerPicker.sol";
 import {console} from "forge-std/console.sol";
 import {Script} from "forge-std/Script.sol";
 
-contract test_deploy is Script {
-    // uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+contract deploy is Script {
     uint256 subId = 90;
     address vrfCoordinator = 0x92fAf43CbBEce86ab3f887B9dFef3a8604b16c4B;
 
     function run() external {
-        //vm.startBroadcast(deployerPrivateKey);
-        RandomWinnerPicker picker = new RandomWinnerPicker(
-            subId,
-            vrfCoordinator
-        );
+        uint256 subId = vm.envUint("_subscriptionId");
+        address coord = vm.envAddress("_coordinator");
+        bytes32 hash = vm.envBytes32("_keyHash");
+        vm.startBroadcast();
+        RandomWinnerPicker picker = new RandomWinnerPicker(subId, coord, hash);
         console.log("Contract deployed at:", address(picker));
-        // vm.stopBroadcast();
+        vm.stopBroadcast();
     }
 }

@@ -7,6 +7,7 @@ import {VRFV2PlusClient} from "@chainlink-brownie-contracts/src/v0.8/vrf/dev/lib
 contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
     uint256 public subscriptionId;
     uint256 public randomResult;
+    bytes32 public keyHash;
     address the_owner;
     address[] public entrants;
     uint256 public prizePool;
@@ -32,8 +33,10 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
 
     constructor(
         uint256 _subscriptionId,
-        address _coordinatorAddress
+        address _coordinatorAddress,
+        bytes32 _keyHash
     ) VRFConsumerBaseV2Plus(_coordinatorAddress) {
+        keyHash = _keyHash;
         subscriptionId = _subscriptionId;
         lotteryState = LotteryState.OPEN;
         the_owner = msg.sender;
@@ -43,13 +46,13 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
         lotteryState = _state;
     }
 
-    function requestRandomWords() public returns (uint256) {
+    function requestRandomWords() internal returns (uint256) {
         require(entrants.length > 2, "Not enough participants");
         require(lotteryState == LotteryState.OPEN);
         lotteryState = LotteryState.CALCULATING;
         VRFV2PlusClient.RandomWordsRequest memory data = VRFV2PlusClient
             .RandomWordsRequest({
-                keyHash: 0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae,
+                keyHash: keyHash,
                 subId: subscriptionId,
                 requestConfirmations: 3,
                 callbackGasLimit: 300000,
@@ -72,7 +75,7 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
         emit WinnerPicked(winner, _prizePool);
         prizePool = 0;
         PendingWithdrawals[winner] += _prizePool;
-        delete entrants;
+        entrants = new address[](0);
         winners.push(Winner({winnerOfTheRound: winner, amountWon: _prizePool}));
         lotteryState = LotteryState.OPEN;
     }
@@ -87,12 +90,14 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
 
     function enter() external payable {
         require(msg.value > 0.0001 ether, "Send 0.0001 ether");
+        require(lotteryState == LotteryState.OPEN);
         entrants.push(msg.sender);
         prizePool += msg.value;
         emit PlayerEntered(msg.sender, msg.value);
-        if (entrants.length > 2) {
-            requestRandomWords();
-        }
+    }
+
+    function initiateDraw() public only_the_owner returns (uint256) {
+        return requestRandomWords();
     }
 
     function findLength() external view returns (uint256) {

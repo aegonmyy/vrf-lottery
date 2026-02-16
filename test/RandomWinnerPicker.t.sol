@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
-pragma solidity 0.8.33;
+pragma solidity ^0.8.13;
 import {Test, console} from "forge-std/Test.sol";
 import {RandomWinnerPicker} from "../src/RandomWinnerPicker.sol";
 import {VRFCoordinatorV2_5Mock} from "@chainlink-brownie-contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
@@ -68,7 +68,7 @@ contract testing_RandomWinnerPicker is Test {
         emit PlayerEntered(sender3, 3 ether);
         randomWinner.enter{value: 3 ether}();
         uint256 totalPrizepooll = randomWinner.prizePool();
-        uint256 requestId = randomWinner.requestRandomWords();
+        uint256 requestId = randomWinner.initiateDraw();
         vrfMock.fulfillRandomWords(requestId, address(randomWinner));
         uint256 p1 = randomWinner.PendingWithdrawals(sender1);
         uint256 p2 = randomWinner.PendingWithdrawals(sender2);
@@ -90,5 +90,14 @@ contract testing_RandomWinnerPicker is Test {
         hoax(sender1);
         vm.expectRevert();
         randomWinner.enter{value: 0.000001 ether}();
+    }
+
+    function test_funnn() public {
+        hoax(sender1, 5 ether);
+        randomWinner.enter{value: 1 ether}();
+        hoax(sender2, 5 ether);
+        randomWinner.enter{value: 2 ether}();
+        hoax(sender3, 5 ether);
+        randomWinner.enter{value: 2 ether}();
     }
 }
