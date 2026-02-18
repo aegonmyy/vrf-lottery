@@ -3,8 +3,12 @@ pragma solidity ^0.8.13;
 
 import {VRFConsumerBaseV2Plus} from "@chainlink-brownie-contracts/src/v0.8/vrf/dev/VRFConsumerBaseV2Plus.sol";
 import {VRFV2PlusClient} from "@chainlink-brownie-contracts/src/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol";
+import {AutomationCompatibleInterface} from "@chainlink-brownie-contracts/src/v0.8/automation/interfaces/AutomationCompatibleInterface.sol";
 
-contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
+contract RandomWinnerPicker is
+    VRFConsumerBaseV2Plus,
+    AutomationCompatibleInterface
+{
     error RandomWinnerPicker__nothingToWithdraw();
     error RandomWinnerPicker__claimingFailed();
     error RandomWinnerPicker__sendMoreToEnter();
@@ -12,12 +16,13 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
     error RandomWinnerPicker__NotEnoughParticipants();
     error RandomWinnerPicker__OnlyOwner();
 
-    LotteryState public lotteryState;
     uint256 public subscriptionId;
     uint256 public randomResult;
     bytes32 public keyHash;
     address public the_owner;
     uint256 public i_entranceFee;
+    uint256 public interval;
+    uint256 public lastTimestamp;
     address[] public entrants;
     uint256 public prizePool;
     mapping(address => uint256) public PendingWithdrawals;
@@ -26,6 +31,7 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
         CALCULATING,
         CLOSED
     }
+    LotteryState public lotteryState;
 
     struct Winner {
         address winnerOfTheRound;
@@ -60,9 +66,29 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
         i_entranceFee = fee;
     }
 
+    function checkUpkeep(
+        bytes calldata /* checkData */
+    )
+        external
+        view
+        override
+        returns (bool upkeepNeeded, bytes memory performData)
+    {
+        bool isOpen = LotteryState.OPEN == lotteryState;
+        bool timePassed = ((block.timestamp - lastTimestamp) > interval);
+        bool hasEnoughPlayers = entrants.length > 2;
+        bool upkeepNeeded = (isOpen && timePassed && hasEnoughPlayers);
+        return (upkeepNeeded, "");
+    }
+
+    function performUpkeep(bytes calldata performData) external override {
+        requestRandomWords();
+    }
+
     function withdrawPrize() external {
         uint256 amount = PendingWithdrawals[msg.sender];
-        revert RandomWinnerPicker__nothingToWithdraw();
+        if (PendingWithdrawals[msg.sender] == 0)
+            revert RandomWinnerPicker__nothingToWithdraw();
         PendingWithdrawals[msg.sender] = 0;
         (bool success, ) = msg.sender.call{value: amount}("");
         revert RandomWinnerPicker__claimingFailed();
@@ -78,15 +104,11 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
         emit PlayerEntered(msg.sender, msg.value);
     }
 
-    function initiateDraw() external only_the_owner returns (uint256) {
+    function manuallyInitiateDraw() external only_the_owner returns (uint256) {
         return requestRandomWords();
     }
 
     function requestRandomWords() internal returns (uint256) {
-        if (entrants.length > 2)
-            revert RandomWinnerPicker__NotEnoughParticipants();
-        if (lotteryState == LotteryState.OPEN)
-            revert RandomWinnerPicker__raffleNotOpen();
         lotteryState = LotteryState.CALCULATING;
         VRFV2PlusClient.RandomWordsRequest memory data = VRFV2PlusClient
             .RandomWordsRequest({
@@ -116,6 +138,7 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
         entrants = new address[](0);
         winners.push(Winner({winnerOfTheRound: winner, amountWon: _prizePool}));
         lotteryState = LotteryState.OPEN;
+        lastTimestamp = block.timestamp;
     }
 
     function findLength() external view returns (uint256) {

@@ -76,7 +76,7 @@ contract testing_RandomWinnerPicker is Test {
         emit PlayerEntered(sender3, 3 ether);
         randomWinner.enter{value: 3 ether}();
         uint256 totalPrizepooll = randomWinner.prizePool();
-        uint256 requestId = randomWinner.initiateDraw();
+        uint256 requestId = randomWinner.manuallyInitiateDraw();
         vrfMock.fulfillRandomWords(requestId, address(randomWinner));
         uint256 p1 = randomWinner.PendingWithdrawals(sender1);
         uint256 p2 = randomWinner.PendingWithdrawals(sender2);
