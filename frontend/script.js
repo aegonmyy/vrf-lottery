@@ -4,7 +4,14 @@ import { abi, contract_address } from "./constant.js"
 const connectBtn = document.getElementById("connect-btn")
 const startDraw = document.getElementById("draw-btn")
 const entryBtn = document.getElementById("entry-btn")
+let provider = new ethers.BrowserProvider(window.ethereum)
+await provider.send('eth_requestAccounts', [])
+const signer = await provider.getSigner()
+const contract = new ethers.Contract(contract_address, abi, signer)
 
+contract.on("PlayerEntered", (player, amount) => {
+    console.log("A new player entered", player, "with amount", ethers.formatEther(amount))
+})
 connectBtn.addEventListener("click", async () => {
     if (typeof window.ethereum !== "undefined") {
         try {
@@ -53,3 +60,4 @@ startDraw.addEventListener("click", async () => {
         }
     }
 })
+

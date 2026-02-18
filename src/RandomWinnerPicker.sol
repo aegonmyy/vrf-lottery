@@ -5,10 +5,19 @@ import {VRFConsumerBaseV2Plus} from "@chainlink-brownie-contracts/src/v0.8/vrf/d
 import {VRFV2PlusClient} from "@chainlink-brownie-contracts/src/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol";
 
 contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
+    error RandomWinnerPicker__nothingToWithdraw();
+    error RandomWinnerPicker__claimingFailed();
+    error RandomWinnerPicker__sendMoreToEnter();
+    error RandomWinnerPicker__raffleNotOpen();
+    error RandomWinnerPicker__NotEnoughParticipants();
+    error RandomWinnerPicker__OnlyOwner();
+
+    LotteryState public lotteryState;
     uint256 public subscriptionId;
     uint256 public randomResult;
     bytes32 public keyHash;
-    address the_owner;
+    address public the_owner;
+    uint256 public i_entranceFee;
     address[] public entrants;
     uint256 public prizePool;
     mapping(address => uint256) public PendingWithdrawals;
@@ -17,11 +26,6 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
         CALCULATING,
         CLOSED
     }
-    modifier only_the_owner() {
-        require(msg.sender == the_owner);
-        _;
-    }
-    LotteryState public lotteryState;
 
     struct Winner {
         address winnerOfTheRound;
@@ -30,25 +34,59 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
     Winner[] public winners;
     event PlayerEntered(address indexed player, uint256 amount);
     event WinnerPicked(address indexed winner, uint256 amount);
+    modifier only_the_owner() {
+        if (msg.sender != the_owner) revert RandomWinnerPicker__OnlyOwner();
+        _;
+    }
 
     constructor(
         uint256 _subscriptionId,
+        uint256 _fee,
         address _coordinatorAddress,
         bytes32 _keyHash
     ) VRFConsumerBaseV2Plus(_coordinatorAddress) {
         keyHash = _keyHash;
+        i_entranceFee = _fee;
         subscriptionId = _subscriptionId;
         lotteryState = LotteryState.OPEN;
         the_owner = msg.sender;
     }
 
-    function changeLotteryState(LotteryState _state) public only_the_owner {
+    function changeLotteryState(LotteryState _state) external only_the_owner {
         lotteryState = _state;
     }
 
+    function setLotteryMinEntry(uint256 fee) external only_the_owner {
+        i_entranceFee = fee;
+    }
+
+    function withdrawPrize() external {
+        uint256 amount = PendingWithdrawals[msg.sender];
+        revert RandomWinnerPicker__nothingToWithdraw();
+        PendingWithdrawals[msg.sender] = 0;
+        (bool success, ) = msg.sender.call{value: amount}("");
+        revert RandomWinnerPicker__claimingFailed();
+    }
+
+    function enter() external payable {
+        if (msg.value < i_entranceFee)
+            revert RandomWinnerPicker__sendMoreToEnter();
+        if (lotteryState != LotteryState.OPEN)
+            revert RandomWinnerPicker__raffleNotOpen();
+        entrants.push(msg.sender);
+        prizePool += msg.value;
+        emit PlayerEntered(msg.sender, msg.value);
+    }
+
+    function initiateDraw() external only_the_owner returns (uint256) {
+        return requestRandomWords();
+    }
+
     function requestRandomWords() internal returns (uint256) {
-        require(entrants.length > 2, "Not enough participants");
-        require(lotteryState == LotteryState.OPEN);
+        if (entrants.length > 2)
+            revert RandomWinnerPicker__NotEnoughParticipants();
+        if (lotteryState == LotteryState.OPEN)
+            revert RandomWinnerPicker__raffleNotOpen();
         lotteryState = LotteryState.CALCULATING;
         VRFV2PlusClient.RandomWordsRequest memory data = VRFV2PlusClient
             .RandomWordsRequest({
@@ -78,26 +116,6 @@ contract RandomWinnerPicker is VRFConsumerBaseV2Plus {
         entrants = new address[](0);
         winners.push(Winner({winnerOfTheRound: winner, amountWon: _prizePool}));
         lotteryState = LotteryState.OPEN;
-    }
-
-    function withdrawPrize() external {
-        uint256 amount = PendingWithdrawals[msg.sender];
-        require(amount > 0, "nothing to withdraw");
-        PendingWithdrawals[msg.sender] = 0;
-        (bool success, ) = msg.sender.call{value: amount}("");
-        require(success, "Claiming Failed");
-    }
-
-    function enter() external payable {
-        require(msg.value > 0.0001 ether, "Send 0.0001 ether");
-        require(lotteryState == LotteryState.OPEN);
-        entrants.push(msg.sender);
-        prizePool += msg.value;
-        emit PlayerEntered(msg.sender, msg.value);
-    }
-
-    function initiateDraw() public only_the_owner returns (uint256) {
-        return requestRandomWords();
     }
 
     function findLength() external view returns (uint256) {

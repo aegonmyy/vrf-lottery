@@ -12,11 +12,19 @@ contract testing_RandomWinnerPicker is Test {
     address sender3;
     event PlayerEntered(address indexed player, uint256 amount);
     event WinnerPicked(address indexed winner, uint256 amount);
+    bytes32 keyHash =
+        0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae;
 
     function setUp() public {
         vrfMock = new VRFCoordinatorV2_5Mock(0.25 ether, 1e9, 4e15);
         uint256 subId = vrfMock.createSubscription();
-        randomWinner = new RandomWinnerPicker(subId, address(vrfMock));
+        uint256 fee = 0.01 ether;
+        randomWinner = new RandomWinnerPicker(
+            subId,
+            fee,
+            address(vrfMock),
+            keyHash
+        );
         vrfMock.addConsumer(subId, address(randomWinner));
         vrfMock.fundSubscription(subId, 10000 ether);
         sender1 = makeAddr("sender1");
