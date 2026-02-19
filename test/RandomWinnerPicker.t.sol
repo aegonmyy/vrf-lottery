@@ -18,7 +18,7 @@ contract testing_RandomWinnerPicker is Test {
     function setUp() public {
         vrfMock = new VRFCoordinatorV2_5Mock(0.25 ether, 1e9, 4e15);
         uint256 subId = vrfMock.createSubscription();
-        uint256 fee = 0.01 ether;
+        uint256 fee = 1 ether;
         randomWinner = new RandomWinnerPicker(
             subId,
             fee,
@@ -36,36 +36,36 @@ contract testing_RandomWinnerPicker is Test {
     function test_SingleDeposit() public {
         hoax(sender1);
         vm.expectEmit(true, false, false, true);
-        emit PlayerEntered(sender1, 0.01 ether);
-        randomWinner.enter{value: 0.01 ether}();
+        emit PlayerEntered(sender1, 1 ether);
+        randomWinner.enter{value: 1 ether}();
         assertEq(randomWinner.entrants(0), sender1);
-        assertEq(randomWinner.prizePool(), 0.01 ether);
+        assertEq(randomWinner.prizePool(), 1 ether);
     }
 
     function test_MultipleUserDeposit() public {
         hoax(sender1);
         vm.expectEmit(true, false, false, true);
-        emit PlayerEntered(sender1, 0.002 ether);
-        randomWinner.enter{value: 0.002 ether}();
+        emit PlayerEntered(sender1, 1 ether);
+        randomWinner.enter{value: 1 ether}();
         hoax(sender2);
         vm.expectEmit(true, false, false, true);
-        emit PlayerEntered(sender2, 0.003 ether);
-        randomWinner.enter{value: 0.003 ether}();
+        emit PlayerEntered(sender2, 1 ether);
+        randomWinner.enter{value: 1 ether}();
         hoax(sender3);
         vm.expectEmit(true, false, false, true);
-        emit PlayerEntered(sender3, 0.004 ether);
-        randomWinner.enter{value: 0.004 ether}();
+        emit PlayerEntered(sender3, 1 ether);
+        randomWinner.enter{value: 1 ether}();
         assertEq(randomWinner.findLength(), 3);
         assertEq(randomWinner.entrants(0), sender1);
         assertEq(randomWinner.entrants(1), sender2);
         assertEq(randomWinner.entrants(2), sender3);
-        assertEq(randomWinner.prizePool(), 0.009 ether);
+        assertEq(randomWinner.prizePool(), 3 ether);
     }
 
     function test_CompleteFLow() public {
         hoax(sender1, 5 ether);
         vm.expectEmit(true, false, false, true);
-        emit PlayerEntered(sender1, 1 ether);
+        emit PlayerEnter3ed(sender1, 1 ether);
         randomWinner.enter{value: 1 ether}();
         hoax(sender2, 5 ether);
         vm.expectEmit(true, false, false, true);
@@ -84,8 +84,8 @@ contract testing_RandomWinnerPicker is Test {
 
         assertEq(p1 + p2 + p3, totalPrizepooll);
         assertEq(randomWinner.prizePool(), 0);
-        (address winnerAddr, uint256 t_Prizepool) = randomWinner.winners(0);
-        console.log("the winner prize is :", t_Prizepool);
+        (address winnerAddr, uint256 tPrizepool) = randomWinner.winners(0);
+        console.log("the winner prize is :", tPrizepool);
         assertTrue(
             winnerAddr == sender1 ||
                 winnerAddr == sender2 ||

@@ -15,6 +15,11 @@ contract RandomWinnerPicker is
     error RandomWinnerPicker__raffleNotOpen();
     error RandomWinnerPicker__NotEnoughParticipants();
     error RandomWinnerPicker__OnlyOwner();
+    error Raffle__UpkeepNotNeeded(
+        uint256 currentBalance,
+        uint256 numPlayers,
+        uint256 raffleState
+    );
 
     uint256 public subscriptionId;
     uint256 public randomResult;
@@ -72,16 +77,23 @@ contract RandomWinnerPicker is
         external
         view
         override
-        returns (bool upkeepNeeded, bytes memory performData)
+        returns (bool _upkeepNeeded, bytes memory performData)
     {
         bool isOpen = LotteryState.OPEN == lotteryState;
         bool timePassed = ((block.timestamp - lastTimestamp) > interval);
         bool hasEnoughPlayers = entrants.length > 2;
-        bool upkeepNeeded = (isOpen && timePassed && hasEnoughPlayers);
-        return (upkeepNeeded, "");
+        bool _upkeepNeed = (isOpen && timePassed && hasEnoughPlayers);
+        return (_upkeepNeed, "");
     }
 
     function performUpkeep(bytes calldata performData) external override {
+        (bool upkeepNeeded, ) = this.checkUpkeep("");
+        if (!upkeepNeeded)
+            revert Raffle__UpkeepNotNeeded(
+                address(this).balance,
+                entrants.length,
+                uint256(lotteryState)
+            );
         requestRandomWords();
     }
 
@@ -91,7 +103,7 @@ contract RandomWinnerPicker is
             revert RandomWinnerPicker__nothingToWithdraw();
         PendingWithdrawals[msg.sender] = 0;
         (bool success, ) = msg.sender.call{value: amount}("");
-        revert RandomWinnerPicker__claimingFailed();
+        if (!success) revert RandomWinnerPicker__claimingFailed();
     }
 
     function enter() external payable {

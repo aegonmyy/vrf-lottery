@@ -1,0 +1,369 @@
+Compiling 38 files with Solc 0.8.33
+Solc 0.8.33 finished in 3.21s
+Compiler run successful with warnings:
+Warning (2519): This declaration shadows an existing declaration.
+  --> src/RandomWinnerPicker.sol:80:9:
+   |
+80 |         bool upkeepNeeded = (isOpen && timePassed && hasEnoughPlayers);
+   |         ^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> src/RandomWinnerPicker.sol:75:18:
+   |
+75 |         returns (bool upkeepNeeded, bytes memory performData)
+   |                  ^^^^^^^^^^^^^^^^^
+
+Warning (2519): This declaration shadows an existing declaration.
+  --> script/RandomWinnerPicker.s.sol:13:9:
+   |
+13 |         uint256 subId = vm.envUint("_subscriptionId");
+   |         ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+ --> script/RandomWinnerPicker.s.sol:9:5:
+  |
+9 |     uint256 subId;
+  |     ^^^^^^^^^^^^^
+
+Warning (2424): Natspec memory-safe-assembly special comment for inline assembly is deprecated and scheduled for removal. Use the memory-safe block annotation instead.
+   --> lib/chainlink-brownie-contracts/contracts/src/v0.8/vendor/openzeppelin-solidity/v4.7.3/contracts/utils/structs/EnumerableSet.sol:222:9:
+    |
+222 |         assembly {
+    |         ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2424): Natspec memory-safe-assembly special comment for inline assembly is deprecated and scheduled for removal. Use the memory-safe block annotation instead.
+   --> lib/chainlink-brownie-contracts/contracts/src/v0.8/vendor/openzeppelin-solidity/v4.7.3/contracts/utils/structs/EnumerableSet.sol:296:9:
+    |
+296 |         assembly {
+    |         ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2424): Natspec memory-safe-assembly special comment for inline assembly is deprecated and scheduled for removal. Use the memory-safe block annotation instead.
+   --> lib/chainlink-brownie-contracts/contracts/src/v0.8/vendor/openzeppelin-solidity/v4.7.3/contracts/utils/structs/EnumerableSet.sol:370:9:
+    |
+370 |         assembly {
+    |         ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> src/RandomWinnerPicker.sol:84:28:
+   |
+84 |     function performUpkeep(bytes calldata performData) external override {
+   |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2072): Unused local variable.
+  --> src/RandomWinnerPicker.sol:93:10:
+   |
+93 |         (bool success, ) = msg.sender.call{value: amount}("");
+   |          ^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> src/RandomWinnerPicker.sol:128:9:
+    |
+128 |         uint256 requestId,
+    |         ^^^^^^^^^^^^^^^^^
+
+Analysing contracts...
+Running tests...
+
+Ran 5 tests for test/RandomWinnerPicker.t.sol:testing_RandomWinnerPicker
+[PASS] test_CompleteFLow() (gas: 432615)
+[PASS] test_MultipleUserDeposit() (gas: 178930)
+[PASS] test_SingleDeposit() (gas: 96715)
+[PASS] test_funnn() (gas: 161725)
+[PASS] test_insufficientBalance() (gas: 20598)
+Suite result: ok. 5 passed; 0 failed; 0 skipped; finished in 7.58ms (9.73ms CPU time)
+
+Ran 1 test suite in 28.94ms (7.58ms CPU time): 5 tests passed, 0 failed, 0 skipped (5 total tests)
+script/RandomWinnerPicker.s.sol:
+- Line (location: (source ID: 35, lines: 12..27, bytes: 316..804), hits: 0) -> "or;\r\n\r\n    function run() extern...:\", address(picker));\r\n        v"
+- Function "run" (location: (source ID: 35, lines: 12..27, bytes: 316..804), hits: 0) -> "or;\r\n\r\n    function run() extern...:\", address(picker));\r\n        v"
+- Line (location: (source ID: 35, lines: 13..14, bytes: 350..395), hits: 0) -> " {\r\n        uint256 subId = vm.envUint(\"_subs"
+- Statement (location: (source ID: 35, lines: 13..14, bytes: 350..395), hits: 0) -> " {\r\n        uint256 subId = vm.envUint(\"_subs"
+- Statement (location: (source ID: 35, lines: 13..14, bytes: 366..395), hits: 0) -> "256 subId = vm.envUint(\"_subs"
+- Line (location: (source ID: 35, lines: 14..15, bytes: 405..450), hits: 0) -> "\");\r\n        address coord = vm.envAddress(\"_"
+- Statement (location: (source ID: 35, lines: 14..15, bytes: 405..450), hits: 0) -> "\");\r\n        address coord = vm.envAddress(\"_"
+- Statement (location: (source ID: 35, lines: 14..15, bytes: 421..450), hits: 0) -> "ress coord = vm.envAddress(\"_"
+- Line (location: (source ID: 35, lines: 15..16, bytes: 460..500), hits: 0) -> "r\");\r\n        bytes32 hash = vm.envBytes"
+- Statement (location: (source ID: 35, lines: 15..16, bytes: 460..500), hits: 0) -> "r\");\r\n        bytes32 hash = vm.envBytes"
+- Statement (location: (source ID: 35, lines: 15..16, bytes: 475..500), hits: 0) -> "ytes32 hash = vm.envBytes"
+- Line (location: (source ID: 35, lines: 16..17, bytes: 510..534), hits: 0) -> "sh\");\r\n        uint256 f"
+- Statement (location: (source ID: 35, lines: 16..17, bytes: 510..534), hits: 0) -> "sh\");\r\n        uint256 f"
+- Line (location: (source ID: 35, lines: 17..18, bytes: 544..563), hits: 0) -> "ether;\r\n        vm."
+- Statement (location: (source ID: 35, lines: 17..18, bytes: 544..563), hits: 0) -> "ether;\r\n        vm."
+- Line (location: (source ID: 35, lines: 18..24, bytes: 573..706), hits: 0) -> "cast();\r\n        RandomWinnerPic... fee,\r\n            coord,\r\n     "
+- Statement (location: (source ID: 35, lines: 18..24, bytes: 573..706), hits: 0) -> "cast();\r\n        RandomWinnerPic... fee,\r\n            coord,\r\n     "
+- Statement (location: (source ID: 35, lines: 18..24, bytes: 601..706), hits: 0) -> "rPicker picker = new RandomWinne... fee,\r\n            coord,\r\n     "
+- Line (location: (source ID: 35, lines: 24..25, bytes: 716..769), hits: 0) -> "h\r\n        );\r\n        console.log(\"Contract deployed"
+- Statement (location: (source ID: 35, lines: 24..25, bytes: 716..769), hits: 0) -> "h\r\n        );\r\n        console.log(\"Contract deployed"
+- Line (location: (source ID: 35, lines: 25..26, bytes: 779..797), hits: 0) -> "ress(picker));\r\n  "
+- Statement (location: (source ID: 35, lines: 25..26, bytes: 779..797), hits: 0) -> "ress(picker));\r\n  "
+
+src/RandomWinnerPicker.sol:
+- Line (location: (source ID: 36, lines: 43..47, bytes: 1519..1640), hits: 0) -> "ess indexed winner, uint256 amou...nder != the_owner) revert Random"
+- Function "only_the_owner" (location: (source ID: 36, lines: 43..47, bytes: 1519..1640), hits: 0) -> "ess indexed winner, uint256 amou...nder != the_owner) revert Random"
+- Line (location: (source ID: 36, lines: 44..45, bytes: 1559..1582), hits: 0) -> "  modifier only_the_own"
+- Statement (location: (source ID: 36, lines: 44..45, bytes: 1559..1582), hits: 0) -> "  modifier only_the_own"
+- Statement (location: (source ID: 36, lines: 44..45, bytes: 1584..1622), hits: 0) -> "() {\r\n        if (msg.sender != the_ow"
+- Branch (branch: 0, path: 0) (location: (source ID: 36, lines: 44..45, bytes: 1584..1622), hits: 0) -> "() {\r\n        if (msg.sender != the_ow"
+- Line (location: (source ID: 36, lines: 48..60, bytes: 1646..2006), hits: 5) -> "Picker__OnlyOwner();\r\n        _;...tionId;\r\n        lotteryState = "
+- Function "constructor" (location: (source ID: 36, lines: 48..60, bytes: 1646..2006), hits: 5) -> "Picker__OnlyOwner();\r\n        _;...tionId;\r\n        lotteryState = "
+- Line (location: (source ID: 36, lines: 54..55, bytes: 1835..1853), hits: 5) -> "RFConsumerBaseV2Pl"
+- Statement (location: (source ID: 36, lines: 54..55, bytes: 1835..1853), hits: 5) -> "RFConsumerBaseV2Pl"
+- Line (location: (source ID: 36, lines: 55..56, bytes: 1863..1883), hits: 5) -> "natorAddress) {\r\n   "
+- Statement (location: (source ID: 36, lines: 55..56, bytes: 1863..1883), hits: 5) -> "natorAddress) {\r\n   "
+- Line (location: (source ID: 36, lines: 56..57, bytes: 1893..1925), hits: 5) -> "sh = _keyHash;\r\n        i_entran"
+- Statement (location: (source ID: 36, lines: 56..57, bytes: 1893..1925), hits: 5) -> "sh = _keyHash;\r\n        i_entran"
+- Line (location: (source ID: 36, lines: 57..58, bytes: 1935..1967), hits: 5) -> "ee;\r\n        subscriptionId = _s"
+- Statement (location: (source ID: 36, lines: 57..58, bytes: 1935..1967), hits: 5) -> "ee;\r\n        subscriptionId = _s"
+- Line (location: (source ID: 36, lines: 58..59, bytes: 1977..1999), hits: 5) -> "nId;\r\n        lotteryS"
+- Statement (location: (source ID: 36, lines: 58..59, bytes: 1977..1999), hits: 5) -> "nId;\r\n        lotteryS"
+- Line (location: (source ID: 36, lines: 61..64, bytes: 2012..2123), hits: 0) -> "yState.OPEN;\r\n        the_owner ...eryState(LotteryState _state) ex"
+- Function "changeLotteryState" (location: (source ID: 36, lines: 61..64, bytes: 2012..2123), hits: 0) -> "yState.OPEN;\r\n        the_owner ...eryState(LotteryState _state) ex"
+- Line (location: (source ID: 36, lines: 62..63, bytes: 2095..2116), hits: 0) -> "tate(LotteryState _st"
+- Statement (location: (source ID: 36, lines: 62..63, bytes: 2095..2116), hits: 0) -> "tate(LotteryState _st"
+- Line (location: (source ID: 36, lines: 65..68, bytes: 2129..2230), hits: 0) -> " only_the_owner {\r\n        lotte...ion setLotteryMinEntry(uint256 f"
+- Function "setLotteryMinEntry" (location: (source ID: 36, lines: 65..68, bytes: 2129..2230), hits: 0) -> " only_the_owner {\r\n        lotte...ion setLotteryMinEntry(uint256 f"
+- Line (location: (source ID: 36, lines: 66..67, bytes: 2204..2223), hits: 0) -> "tLotteryMinEntry(ui"
+- Statement (location: (source ID: 36, lines: 66..67, bytes: 2204..2223), hits: 0) -> "tLotteryMinEntry(ui"
+- Line (location: (source ID: 36, lines: 69..83, bytes: 2236..2714), hits: 0) -> "ternal only_the_owner {\r\n       ...       bool upkeepNeeded = (isOp"
+- Function "checkUpkeep" (location: (source ID: 36, lines: 69..83, bytes: 2236..2714), hits: 0) -> "ternal only_the_owner {\r\n       ...       bool upkeepNeeded = (isOp"
+- Line (location: (source ID: 36, lines: 77..78, bytes: 2426..2473), hits: 0) -> "      returns (bool upkeepNeeded, bytes memory "
+- Statement (location: (source ID: 36, lines: 77..78, bytes: 2426..2473), hits: 0) -> "      returns (bool upkeepNeeded, bytes memory "
+- Statement (location: (source ID: 36, lines: 77..78, bytes: 2440..2473), hits: 0) -> "(bool upkeepNeeded, bytes memory "
+- Line (location: (source ID: 36, lines: 78..79, bytes: 2483..2547), hits: 0) -> "a)\r\n    {\r\n        bool isOpen = LotteryState.OPEN == lotterySta"
+- Statement (location: (source ID: 36, lines: 78..79, bytes: 2483..2547), hits: 0) -> "a)\r\n    {\r\n        bool isOpen = LotteryState.OPEN == lotterySta"
+- Line (location: (source ID: 36, lines: 79..80, bytes: 2557..2600), hits: 0) -> "   bool timePassed = ((block.timestamp - la"
+- Statement (location: (source ID: 36, lines: 79..80, bytes: 2557..2600), hits: 0) -> "   bool timePassed = ((block.timestamp - la"
+- Statement (location: (source ID: 36, lines: 79..80, bytes: 2581..2600), hits: 0) -> "lock.timestamp - la"
+- Line (location: (source ID: 36, lines: 80..81, bytes: 2610..2672), hits: 0) -> "p) > interval);\r\n        bool hasEnoughPlayers = entrants.leng"
+- Statement (location: (source ID: 36, lines: 80..81, bytes: 2610..2672), hits: 0) -> "p) > interval);\r\n        bool hasEnoughPlayers = entrants.leng"
+- Line (location: (source ID: 36, lines: 81..82, bytes: 2682..2707), hits: 0) -> "       bool upkeepNeeded "
+- Statement (location: (source ID: 36, lines: 81..82, bytes: 2682..2707), hits: 0) -> "       bool upkeepNeeded "
+- Line (location: (source ID: 36, lines: 84..87, bytes: 2720..2826), hits: 0) -> "timePassed && hasEnoughPlayers);...}\r\n\r\n    function performUpkeep("
+- Function "performUpkeep" (location: (source ID: 36, lines: 84..87, bytes: 2720..2826), hits: 0) -> "timePassed && hasEnoughPlayers);...}\r\n\r\n    function performUpkeep("
+- Line (location: (source ID: 36, lines: 85..86, bytes: 2799..2819), hits: 0) -> "    function perform"
+- Statement (location: (source ID: 36, lines: 85..86, bytes: 2799..2819), hits: 0) -> "    function perform"
+- Line (location: (source ID: 36, lines: 88..96, bytes: 2832..3199), hits: 0) -> "calldata performData) external o...;\r\n        (bool success, ) = ms"
+- Function "withdrawPrize" (location: (source ID: 36, lines: 88..96, bytes: 2832..3199), hits: 0) -> "calldata performData) external o...;\r\n        (bool success, ) = ms"
+- Line (location: (source ID: 36, lines: 89..90, bytes: 2876..2923), hits: 0) -> "       requestRandomWords();\r\n    }\r\n\r\n    func"
+- Statement (location: (source ID: 36, lines: 89..90, bytes: 2876..2923), hits: 0) -> "       requestRandomWords();\r\n    }\r\n\r\n    func"
+- Line (location: (source ID: 36, lines: 90..91, bytes: 2937..2972), hits: 0) -> "rize() external {\r\n        uint256 "
+- Statement (location: (source ID: 36, lines: 90..91, bytes: 2937..2972), hits: 0) -> "rize() external {\r\n        uint256 "
+- Line (location: (source ID: 36, lines: 91..92, bytes: 2986..3032), hits: 0) -> "ngWithdrawals[msg.sender];\r\n        if (Pendin"
+- Statement (location: (source ID: 36, lines: 91..92, bytes: 2986..3032), hits: 0) -> "ngWithdrawals[msg.sender];\r\n        if (Pendin"
+- Branch (branch: 1, path: 0) (location: (source ID: 36, lines: 91..92, bytes: 2986..3032), hits: 0) -> "ngWithdrawals[msg.sender];\r\n        if (Pendin"
+- Line (location: (source ID: 36, lines: 92..93, bytes: 3042..3076), hits: 0) -> "ls[msg.sender] == 0)\r\n            "
+- Statement (location: (source ID: 36, lines: 92..93, bytes: 3042..3076), hits: 0) -> "ls[msg.sender] == 0)\r\n            "
+- Line (location: (source ID: 36, lines: 93..94, bytes: 3086..3139), hits: 0) -> "domWinnerPicker__nothingToWithdraw();\r\n        Pendin"
+- Statement (location: (source ID: 36, lines: 93..94, bytes: 3086..3139), hits: 0) -> "domWinnerPicker__nothingToWithdraw();\r\n        Pendin"
+- Statement (location: (source ID: 36, lines: 93..94, bytes: 3105..3139), hits: 0) -> "thingToWithdraw();\r\n        Pendin"
+- Line (location: (source ID: 36, lines: 94..95, bytes: 3149..3192), hits: 0) -> "ls[msg.sender] = 0;\r\n        (bool success,"
+- Statement (location: (source ID: 36, lines: 94..95, bytes: 3149..3192), hits: 0) -> "ls[msg.sender] = 0;\r\n        (bool success,"
+- Line (location: (source ID: 36, lines: 97..106, bytes: 3205..3564), hits: 11) -> "er.call{value: amount}(\"\");\r\n   ...tOpen();\r\n        entrants.push("
+- Function "enter" (location: (source ID: 36, lines: 97..106, bytes: 3205..3564), hits: 11) -> "er.call{value: amount}(\"\");\r\n   ...tOpen();\r\n        entrants.push("
+- Line (location: (source ID: 36, lines: 98..99, bytes: 3253..3278), hits: 11) -> "omWinnerPicker__claimingF"
+- Statement (location: (source ID: 36, lines: 98..99, bytes: 3253..3278), hits: 11) -> "omWinnerPicker__claimingF"
+- Line (location: (source ID: 36, lines: 99..100, bytes: 3292..3336), hits: 1) -> "}\r\n\r\n    function enter() external payable {"
+- Statement (location: (source ID: 36, lines: 99..100, bytes: 3292..3336), hits: 1) -> "}\r\n\r\n    function enter() external payable {"
+- Branch (branch: 2, path: 0) (location: (source ID: 36, lines: 99..100, bytes: 3292..3336), hits: 1) -> "}\r\n\r\n    function enter() external payable {"
+- Line (location: (source ID: 36, lines: 100..101, bytes: 3350..3383), hits: 10) -> "msg.value < i_entranceFee)\r\n     "
+- Statement (location: (source ID: 36, lines: 100..101, bytes: 3350..3383), hits: 10) -> "msg.value < i_entranceFee)\r\n     "
+- Line (location: (source ID: 36, lines: 101..102, bytes: 3397..3439), hits: 0) -> "RandomWinnerPicker__sendMoreToEnter();\r\n  "
+- Statement (location: (source ID: 36, lines: 101..102, bytes: 3397..3439), hits: 0) -> "RandomWinnerPicker__sendMoreToEnter();\r\n  "
+- Branch (branch: 3, path: 0) (location: (source ID: 36, lines: 101..102, bytes: 3397..3439), hits: 0) -> "RandomWinnerPicker__sendMoreToEnter();\r\n  "
+- Line (location: (source ID: 36, lines: 102..103, bytes: 3449..3474), hits: 10) -> "lotteryState != LotterySt"
+- Statement (location: (source ID: 36, lines: 102..103, bytes: 3449..3474), hits: 10) -> "lotteryState != LotterySt"
+- Line (location: (source ID: 36, lines: 103..104, bytes: 3484..3506), hits: 10) -> "\n            revert Ra"
+- Statement (location: (source ID: 36, lines: 103..104, bytes: 3484..3506), hits: 10) -> "\n            revert Ra"
+- Line (location: (source ID: 36, lines: 104..105, bytes: 3516..3557), hits: 10) -> "Picker__raffleNotOpen();\r\n        entrant"
+- Statement (location: (source ID: 36, lines: 104..105, bytes: 3516..3557), hits: 10) -> "Picker__raffleNotOpen();\r\n        entrant"
+- Line (location: (source ID: 36, lines: 107..110, bytes: 3570..3688), hits: 1) -> "nder);\r\n        prizePool += msg...lue);\r\n    }\r\n\r\n    function man"
+- Function "manuallyInitiateDraw" (location: (source ID: 36, lines: 107..110, bytes: 3570..3688), hits: 1) -> "nder);\r\n        prizePool += msg...lue);\r\n    }\r\n\r\n    function man"
+- Line (location: (source ID: 36, lines: 108..109, bytes: 3654..3681), hits: 1) -> "value);\r\n    }\r\n\r\n    funct"
+- Statement (location: (source ID: 36, lines: 108..109, bytes: 3654..3681), hits: 1) -> "value);\r\n    }\r\n\r\n    funct"
+- Statement (location: (source ID: 36, lines: 108..109, bytes: 3661..3681), hits: 1) -> "\r\n    }\r\n\r\n    funct"
+- Line (location: (source ID: 36, lines: 111..126, bytes: 3694..4320), hits: 1) -> "nitiateDraw() external only_the_...   VRFV2PlusClient.ExtraArgsV1({"
+- Function "requestRandomWords" (location: (source ID: 36, lines: 111..126, bytes: 3694..4320), hits: 1) -> "nitiateDraw() external only_the_...   VRFV2PlusClient.ExtraArgsV1({"
+- Line (location: (source ID: 36, lines: 112..113, bytes: 3761..3800), hits: 1) -> "return requestRandomWords();\r\n    }\r\n\r\n"
+- Statement (location: (source ID: 36, lines: 112..113, bytes: 3761..3800), hits: 1) -> "return requestRandomWords();\r\n    }\r\n\r\n"
+- Line (location: (source ID: 36, lines: 113..124, bytes: 3810..4255), hits: 1) -> "on requestRandomWords() internal...      extraArgs: VRFV2PlusClient"
+- Statement (location: (source ID: 36, lines: 113..124, bytes: 3810..4255), hits: 1) -> "on requestRandomWords() internal...      extraArgs: VRFV2PlusClient"
+- Statement (location: (source ID: 36, lines: 113..124, bytes: 3859..4255), hits: 1) -> ") {\r\n        lotteryState = Lott...      extraArgs: VRFV2PlusClient"
+- Line (location: (source ID: 36, lines: 124..125, bytes: 4265..4313), hits: 1) -> "tes(\r\n                    VRFV2PlusClient.ExtraA"
+- Statement (location: (source ID: 36, lines: 124..125, bytes: 4265..4313), hits: 1) -> "tes(\r\n                    VRFV2PlusClient.ExtraA"
+- Statement (location: (source ID: 36, lines: 124..125, bytes: 4272..4313), hits: 1) -> "                   VRFV2PlusClient.ExtraA"
+- Line (location: (source ID: 36, lines: 127..143, bytes: 4326..4964), hits: 1) -> "Payment: false})\r\n              ...\n        winners.push(Winner({wi"
+- Function "fulfillRandomWords" (location: (source ID: 36, lines: 127..143, bytes: 4326..4964), hits: 1) -> "Payment: false})\r\n              ...\n        winners.push(Winner({wi"
+- Line (location: (source ID: 36, lines: 131..132, bytes: 4455..4484), hits: 1) -> "ction fulfillRandomWords(\r\n  "
+- Statement (location: (source ID: 36, lines: 131..132, bytes: 4455..4484), hits: 1) -> "ction fulfillRandomWords(\r\n  "
+- Line (location: (source ID: 36, lines: 132..133, bytes: 4494..4548), hits: 1) -> "256 requestId,\r\n        uint256[] calldata randomWords"
+- Statement (location: (source ID: 36, lines: 132..133, bytes: 4494..4548), hits: 1) -> "256 requestId,\r\n        uint256[] calldata randomWords"
+- Statement (location: (source ID: 36, lines: 132..133, bytes: 4516..4548), hits: 1) -> "  uint256[] calldata randomWords"
+- Line (location: (source ID: 36, lines: 133..134, bytes: 4558..4596), hits: 1) -> "ternal override {\r\n        randomResul"
+- Statement (location: (source ID: 36, lines: 133..134, bytes: 4558..4596), hits: 1) -> "ternal override {\r\n        randomResul"
+- Line (location: (source ID: 36, lines: 134..135, bytes: 4606..4636), hits: 1) -> "Words[0];\r\n        uint256 win"
+- Statement (location: (source ID: 36, lines: 134..135, bytes: 4606..4636), hits: 1) -> "Words[0];\r\n        uint256 win"
+- Line (location: (source ID: 36, lines: 135..136, bytes: 4646..4683), hits: 1) -> " randomWords[0] % entrants.length;\r\n "
+- Statement (location: (source ID: 36, lines: 135..136, bytes: 4646..4683), hits: 1) -> " randomWords[0] % entrants.length;\r\n "
+- Line (location: (source ID: 36, lines: 136..137, bytes: 4693..4706), hits: 1) -> "ress winner ="
+- Statement (location: (source ID: 36, lines: 136..137, bytes: 4693..4706), hits: 1) -> "ress winner ="
+- Line (location: (source ID: 36, lines: 137..138, bytes: 4716..4756), hits: 1) -> "winnerIndex];\r\n        uint256 _prizePoo"
+- Statement (location: (source ID: 36, lines: 137..138, bytes: 4716..4756), hits: 1) -> "winnerIndex];\r\n        uint256 _prizePoo"
+- Line (location: (source ID: 36, lines: 138..139, bytes: 4766..4793), hits: 1) -> "ool;\r\n        emit WinnerPi"
+- Statement (location: (source ID: 36, lines: 138..139, bytes: 4766..4793), hits: 1) -> "ool;\r\n        emit WinnerPi"
+- Line (location: (source ID: 36, lines: 139..140, bytes: 4803..4874), hits: 1) -> "r, _prizePool);\r\n        prizePo...\r\n        PendingWithdrawals[win"
+- Statement (location: (source ID: 36, lines: 139..140, bytes: 4803..4874), hits: 1) -> "r, _prizePool);\r\n        prizePo...\r\n        PendingWithdrawals[win"
+- Line (location: (source ID: 36, lines: 140..141, bytes: 4884..4916), hits: 1) -> "rizePool;\r\n        entrants = ne"
+- Statement (location: (source ID: 36, lines: 140..141, bytes: 4884..4916), hits: 1) -> "rizePool;\r\n        entrants = ne"
+- Line (location: (source ID: 36, lines: 141..142, bytes: 4926..4957), hits: 1) -> "](0);\r\n        winners.push(Win"
+- Statement (location: (source ID: 36, lines: 141..142, bytes: 4926..4957), hits: 1) -> "](0);\r\n        winners.push(Win"
+- Line (location: (source ID: 36, lines: 144..147, bytes: 4970..5063), hits: 1) -> "TheRound: winner, amountWon: _pr...tate = LotteryState.OPEN;\r\n     "
+- Function "findLength" (location: (source ID: 36, lines: 144..147, bytes: 4970..5063), hits: 1) -> "TheRound: winner, amountWon: _pr...tate = LotteryState.OPEN;\r\n     "
+- Line (location: (source ID: 36, lines: 145..146, bytes: 5034..5056), hits: 1) -> "e = LotteryState.OPEN;"
+- Statement (location: (source ID: 36, lines: 145..146, bytes: 5034..5056), hits: 1) -> "e = LotteryState.OPEN;"
+
+Anchors for Contract "deploy" (solc 0.8.33, source ID 35):
+-  runtime IC 56 -> Item 0: Line (location: (source ID: 35, lines: 12..27, bytes: 316..804), hits: 0)
+-  runtime IC 56 -> Item 1: Function "run" (location: (source ID: 35, lines: 12..27, bytes: 316..804), hits: 0)
+-  runtime IC 97 -> Item 2: Line (location: (source ID: 35, lines: 13..14, bytes: 350..395), hits: 0)
+-  runtime IC 97 -> Item 3: Statement (location: (source ID: 35, lines: 13..14, bytes: 350..395), hits: 0)
+-  runtime IC 119 -> Item 4: Statement (location: (source ID: 35, lines: 13..14, bytes: 366..395), hits: 0)
+-  runtime IC 238 -> Item 5: Line (location: (source ID: 35, lines: 14..15, bytes: 405..450), hits: 0)
+-  runtime IC 238 -> Item 6: Statement (location: (source ID: 35, lines: 14..15, bytes: 405..450), hits: 0)
+-  runtime IC 260 -> Item 7: Statement (location: (source ID: 35, lines: 14..15, bytes: 421..450), hits: 0)
+-  runtime IC 379 -> Item 8: Line (location: (source ID: 35, lines: 15..16, bytes: 460..500), hits: 0)
+-  runtime IC 379 -> Item 9: Statement (location: (source ID: 35, lines: 15..16, bytes: 460..500), hits: 0)
+-  runtime IC 401 -> Item 10: Statement (location: (source ID: 35, lines: 15..16, bytes: 475..500), hits: 0)
+-  runtime IC 520 -> Item 11: Line (location: (source ID: 35, lines: 16..17, bytes: 510..534), hits: 0)
+-  runtime IC 520 -> Item 12: Statement (location: (source ID: 35, lines: 16..17, bytes: 510..534), hits: 0)
+-  runtime IC 552 -> Item 13: Line (location: (source ID: 35, lines: 17..18, bytes: 544..563), hits: 0)
+-  runtime IC 552 -> Item 14: Statement (location: (source ID: 35, lines: 17..18, bytes: 544..563), hits: 0)
+-  runtime IC 642 -> Item 15: Line (location: (source ID: 35, lines: 18..24, bytes: 573..706), hits: 0)
+-  runtime IC 642 -> Item 16: Statement (location: (source ID: 35, lines: 18..24, bytes: 573..706), hits: 0)
+-  runtime IC 643 -> Item 17: Statement (location: (source ID: 35, lines: 18..24, bytes: 601..706), hits: 0)
+-  runtime IC 700 -> Item 18: Line (location: (source ID: 35, lines: 24..25, bytes: 716..769), hits: 0)
+-  runtime IC 700 -> Item 19: Statement (location: (source ID: 35, lines: 24..25, bytes: 716..769), hits: 0)
+-  runtime IC 784 -> Item 20: Line (location: (source ID: 35, lines: 25..26, bytes: 779..797), hits: 0)
+-  runtime IC 784 -> Item 21: Statement (location: (source ID: 35, lines: 25..26, bytes: 779..797), hits: 0)
+
+Anchors for Contract "RandomWinnerPicker" (solc 0.8.33, source ID 36):
+- creation IC 5 -> Item 28: Line (location: (source ID: 36, lines: 48..60, bytes: 1646..2006), hits: 5)
+- creation IC 5 -> Item 29: Function "constructor" (location: (source ID: 36, lines: 48..60, bytes: 1646..2006), hits: 5)
+- creation IC 463 -> Item 30: Line (location: (source ID: 36, lines: 54..55, bytes: 1835..1853), hits: 5)
+- creation IC 463 -> Item 31: Statement (location: (source ID: 36, lines: 54..55, bytes: 1835..1853), hits: 5)
+- creation IC 470 -> Item 32: Line (location: (source ID: 36, lines: 55..56, bytes: 1863..1883), hits: 5)
+- creation IC 470 -> Item 33: Statement (location: (source ID: 36, lines: 55..56, bytes: 1863..1883), hits: 5)
+- creation IC 477 -> Item 34: Line (location: (source ID: 36, lines: 56..57, bytes: 1893..1925), hits: 5)
+- creation IC 477 -> Item 35: Statement (location: (source ID: 36, lines: 56..57, bytes: 1893..1925), hits: 5)
+- creation IC 484 -> Item 36: Line (location: (source ID: 36, lines: 57..58, bytes: 1935..1967), hits: 5)
+- creation IC 484 -> Item 37: Statement (location: (source ID: 36, lines: 57..58, bytes: 1935..1967), hits: 5)
+- creation IC 525 -> Item 38: Line (location: (source ID: 36, lines: 58..59, bytes: 1977..1999), hits: 5)
+- creation IC 525 -> Item 39: Statement (location: (source ID: 36, lines: 58..59, bytes: 1977..1999), hits: 5)
+-  runtime IC 1495 -> Item 22: Line (location: (source ID: 36, lines: 43..47, bytes: 1519..1640), hits: 0)
+-  runtime IC 1495 -> Item 23: Function "only_the_owner" (location: (source ID: 36, lines: 43..47, bytes: 1519..1640), hits: 0)
+-  runtime IC 1495 -> Item 24: Line (location: (source ID: 36, lines: 44..45, bytes: 1559..1582), hits: 0)
+-  runtime IC 1495 -> Item 25: Statement (location: (source ID: 36, lines: 44..45, bytes: 1559..1582), hits: 0)
+-  runtime IC 1579 -> Item 26: Statement (location: (source ID: 36, lines: 44..45, bytes: 1584..1622), hits: 0)
+-  runtime IC 1579 -> Item 27: Branch (branch: 0, path: 0) (location: (source ID: 36, lines: 44..45, bytes: 1584..1622), hits: 0)
+-  runtime IC 800 -> Item 40: Line (location: (source ID: 36, lines: 61..64, bytes: 2012..2123), hits: 0)
+-  runtime IC 800 -> Item 41: Function "changeLotteryState" (location: (source ID: 36, lines: 61..64, bytes: 2012..2123), hits: 0)
+-  runtime IC 2418 -> Item 42: Line (location: (source ID: 36, lines: 62..63, bytes: 2095..2116), hits: 0)
+-  runtime IC 2418 -> Item 43: Statement (location: (source ID: 36, lines: 62..63, bytes: 2095..2116), hits: 0)
+-  runtime IC 514 -> Item 44: Line (location: (source ID: 36, lines: 65..68, bytes: 2129..2230), hits: 0)
+-  runtime IC 514 -> Item 45: Function "setLotteryMinEntry" (location: (source ID: 36, lines: 65..68, bytes: 2129..2230), hits: 0)
+-  runtime IC 1629 -> Item 46: Line (location: (source ID: 36, lines: 66..67, bytes: 2204..2223), hits: 0)
+-  runtime IC 1629 -> Item 47: Statement (location: (source ID: 36, lines: 66..67, bytes: 2204..2223), hits: 0)
+-  runtime IC 882 -> Item 48: Line (location: (source ID: 36, lines: 69..83, bytes: 2236..2714), hits: 0)
+-  runtime IC 882 -> Item 49: Function "checkUpkeep" (location: (source ID: 36, lines: 69..83, bytes: 2236..2714), hits: 0)
+-  runtime IC 2483 -> Item 50: Line (location: (source ID: 36, lines: 77..78, bytes: 2426..2473), hits: 0)
+-  runtime IC 2483 -> Item 51: Statement (location: (source ID: 36, lines: 77..78, bytes: 2426..2473), hits: 0)
+-  runtime IC 2484 -> Item 52: Statement (location: (source ID: 36, lines: 77..78, bytes: 2440..2473), hits: 0)
+-  runtime IC 2539 -> Item 53: Line (location: (source ID: 36, lines: 78..79, bytes: 2483..2547), hits: 0)
+-  runtime IC 2539 -> Item 54: Statement (location: (source ID: 36, lines: 78..79, bytes: 2483..2547), hits: 0)
+-  runtime IC 2560 -> Item 55: Line (location: (source ID: 36, lines: 79..80, bytes: 2557..2600), hits: 0)
+-  runtime IC 2560 -> Item 56: Statement (location: (source ID: 36, lines: 79..80, bytes: 2557..2600), hits: 0)
+-  runtime IC 2561 -> Item 57: Statement (location: (source ID: 36, lines: 79..80, bytes: 2581..2600), hits: 0)
+-  runtime IC 2572 -> Item 58: Line (location: (source ID: 36, lines: 80..81, bytes: 2610..2672), hits: 0)
+-  runtime IC 2572 -> Item 59: Statement (location: (source ID: 36, lines: 80..81, bytes: 2610..2672), hits: 0)
+-  runtime IC 2594 -> Item 60: Line (location: (source ID: 36, lines: 81..82, bytes: 2682..2707), hits: 0)
+-  runtime IC 2594 -> Item 61: Statement (location: (source ID: 36, lines: 81..82, bytes: 2682..2707), hits: 0)
+-  runtime IC 696 -> Item 62: Line (location: (source ID: 36, lines: 84..87, bytes: 2720..2826), hits: 0)
+-  runtime IC 696 -> Item 63: Function "performUpkeep" (location: (source ID: 36, lines: 84..87, bytes: 2720..2826), hits: 0)
+-  runtime IC 1862 -> Item 64: Line (location: (source ID: 36, lines: 85..86, bytes: 2799..2819), hits: 0)
+-  runtime IC 1862 -> Item 65: Statement (location: (source ID: 36, lines: 85..86, bytes: 2799..2819), hits: 0)
+-  runtime IC 736 -> Item 66: Line (location: (source ID: 36, lines: 88..96, bytes: 2832..3199), hits: 0)
+-  runtime IC 736 -> Item 67: Function "withdrawPrize" (location: (source ID: 36, lines: 88..96, bytes: 2832..3199), hits: 0)
+-  runtime IC 1875 -> Item 68: Line (location: (source ID: 36, lines: 89..90, bytes: 2876..2923), hits: 0)
+-  runtime IC 1875 -> Item 69: Statement (location: (source ID: 36, lines: 89..90, bytes: 2876..2923), hits: 0)
+-  runtime IC 1940 -> Item 70: Line (location: (source ID: 36, lines: 90..91, bytes: 2937..2972), hits: 0)
+-  runtime IC 1940 -> Item 71: Statement (location: (source ID: 36, lines: 90..91, bytes: 2937..2972), hits: 0)
+-  runtime IC 2008 -> Item 72: Line (location: (source ID: 36, lines: 91..92, bytes: 2986..3032), hits: 0)
+-  runtime IC 2008 -> Item 73: Statement (location: (source ID: 36, lines: 91..92, bytes: 2986..3032), hits: 0)
+-  runtime IC 2008 -> Item 74: Branch (branch: 1, path: 0) (location: (source ID: 36, lines: 91..92, bytes: 2986..3032), hits: 0)
+-  runtime IC 2058 -> Item 75: Line (location: (source ID: 36, lines: 92..93, bytes: 3042..3076), hits: 0)
+-  runtime IC 2058 -> Item 76: Statement (location: (source ID: 36, lines: 92..93, bytes: 3042..3076), hits: 0)
+-  runtime IC 2124 -> Item 77: Line (location: (source ID: 36, lines: 93..94, bytes: 3086..3139), hits: 0)
+-  runtime IC 2124 -> Item 78: Statement (location: (source ID: 36, lines: 93..94, bytes: 3086..3139), hits: 0)
+-  runtime IC 2125 -> Item 79: Statement (location: (source ID: 36, lines: 93..94, bytes: 3105..3139), hits: 0)
+-  runtime IC 2228 -> Item 80: Line (location: (source ID: 36, lines: 94..95, bytes: 3149..3192), hits: 0)
+-  runtime IC 2228 -> Item 81: Statement (location: (source ID: 36, lines: 94..95, bytes: 3149..3192), hits: 0)
+-  runtime IC 1420 -> Item 82: Line (location: (source ID: 36, lines: 97..106, bytes: 3205..3564), hits: 11)
+-  runtime IC 1420 -> Item 83: Function "enter" (location: (source ID: 36, lines: 97..106, bytes: 3205..3564), hits: 11)
+-  runtime IC 3917 -> Item 84: Line (location: (source ID: 36, lines: 98..99, bytes: 3253..3278), hits: 11)
+-  runtime IC 3917 -> Item 85: Statement (location: (source ID: 36, lines: 98..99, bytes: 3253..3278), hits: 11)
+-  runtime IC 3927 -> Item 86: Line (location: (source ID: 36, lines: 99..100, bytes: 3292..3336), hits: 1)
+-  runtime IC 3927 -> Item 87: Statement (location: (source ID: 36, lines: 99..100, bytes: 3292..3336), hits: 1)
+-  runtime IC 3927 -> Item 88: Branch (branch: 2, path: 0) (location: (source ID: 36, lines: 99..100, bytes: 3292..3336), hits: 1)
+-  runtime IC 3977 -> Item 89: Line (location: (source ID: 36, lines: 100..101, bytes: 3350..3383), hits: 10)
+-  runtime IC 3977 -> Item 90: Statement (location: (source ID: 36, lines: 100..101, bytes: 3350..3383), hits: 10)
+-  runtime IC 4034 -> Item 91: Line (location: (source ID: 36, lines: 101..102, bytes: 3397..3439), hits: 0)
+-  runtime IC 4034 -> Item 92: Statement (location: (source ID: 36, lines: 101..102, bytes: 3397..3439), hits: 0)
+-  runtime IC 4034 -> Item 93: Branch (branch: 3, path: 0) (location: (source ID: 36, lines: 101..102, bytes: 3397..3439), hits: 0)
+-  runtime IC 4084 -> Item 94: Line (location: (source ID: 36, lines: 102..103, bytes: 3449..3474), hits: 10)
+-  runtime IC 4084 -> Item 95: Statement (location: (source ID: 36, lines: 102..103, bytes: 3449..3474), hits: 10)
+-  runtime IC 4180 -> Item 96: Line (location: (source ID: 36, lines: 103..104, bytes: 3484..3506), hits: 10)
+-  runtime IC 4180 -> Item 97: Statement (location: (source ID: 36, lines: 103..104, bytes: 3484..3506), hits: 10)
+-  runtime IC 4204 -> Item 98: Line (location: (source ID: 36, lines: 104..105, bytes: 3516..3557), hits: 10)
+-  runtime IC 4204 -> Item 99: Statement (location: (source ID: 36, lines: 104..105, bytes: 3516..3557), hits: 10)
+-  runtime IC 1318 -> Item 100: Line (location: (source ID: 36, lines: 107..110, bytes: 3570..3688), hits: 1)
+-  runtime IC 1318 -> Item 101: Function "manuallyInitiateDraw" (location: (source ID: 36, lines: 107..110, bytes: 3570..3688), hits: 1)
+-  runtime IC 3845 -> Item 102: Line (location: (source ID: 36, lines: 108..109, bytes: 3654..3681), hits: 1)
+-  runtime IC 3845 -> Item 103: Statement (location: (source ID: 36, lines: 108..109, bytes: 3654..3681), hits: 1)
+-  runtime IC 3845 -> Item 104: Statement (location: (source ID: 36, lines: 108..109, bytes: 3661..3681), hits: 1)
+-  runtime IC 4924 -> Item 105: Line (location: (source ID: 36, lines: 111..126, bytes: 3694..4320), hits: 1)
+-  runtime IC 4924 -> Item 106: Function "requestRandomWords" (location: (source ID: 36, lines: 111..126, bytes: 3694..4320), hits: 1)
+-  runtime IC 4926 -> Item 107: Line (location: (source ID: 36, lines: 112..113, bytes: 3761..3800), hits: 1)
+-  runtime IC 4926 -> Item 108: Statement (location: (source ID: 36, lines: 112..113, bytes: 3761..3800), hits: 1)
+-  runtime IC 4968 -> Item 109: Line (location: (source ID: 36, lines: 113..124, bytes: 3810..4255), hits: 1)
+-  runtime IC 4968 -> Item 110: Statement (location: (source ID: 36, lines: 113..124, bytes: 3810..4255), hits: 1)
+-  runtime IC 4969 -> Item 111: Statement (location: (source ID: 36, lines: 113..124, bytes: 3859..4255), hits: 1)
+-  runtime IC 5065 -> Item 112: Line (location: (source ID: 36, lines: 124..125, bytes: 4265..4313), hits: 1)
+-  runtime IC 5065 -> Item 113: Statement (location: (source ID: 36, lines: 124..125, bytes: 4265..4313), hits: 1)
+-  runtime IC 5065 -> Item 114: Statement (location: (source ID: 36, lines: 124..125, bytes: 4272..4313), hits: 1)
+-  runtime IC 4303 -> Item 115: Line (location: (source ID: 36, lines: 127..143, bytes: 4326..4964), hits: 1)
+-  runtime IC 4303 -> Item 116: Function "fulfillRandomWords" (location: (source ID: 36, lines: 127..143, bytes: 4326..4964), hits: 1)
+-  runtime IC 4304 -> Item 117: Line (location: (source ID: 36, lines: 131..132, bytes: 4455..4484), hits: 1)
+-  runtime IC 4304 -> Item 118: Statement (location: (source ID: 36, lines: 131..132, bytes: 4455..4484), hits: 1)
+-  runtime IC 4336 -> Item 119: Line (location: (source ID: 36, lines: 132..133, bytes: 4494..4548), hits: 1)
+-  runtime IC 4336 -> Item 120: Statement (location: (source ID: 36, lines: 132..133, bytes: 4494..4548), hits: 1)
+-  runtime IC 4337 -> Item 121: Statement (location: (source ID: 36, lines: 132..133, bytes: 4516..4548), hits: 1)
+-  runtime IC 4381 -> Item 122: Line (location: (source ID: 36, lines: 133..134, bytes: 4558..4596), hits: 1)
+-  runtime IC 4381 -> Item 123: Statement (location: (source ID: 36, lines: 133..134, bytes: 4558..4596), hits: 1)
+-  runtime IC 4444 -> Item 124: Line (location: (source ID: 36, lines: 134..135, bytes: 4606..4636), hits: 1)
+-  runtime IC 4444 -> Item 125: Statement (location: (source ID: 36, lines: 134..135, bytes: 4606..4636), hits: 1)
+-  runtime IC 4450 -> Item 126: Line (location: (source ID: 36, lines: 135..136, bytes: 4646..4683), hits: 1)
+-  runtime IC 4450 -> Item 127: Statement (location: (source ID: 36, lines: 135..136, bytes: 4646..4683), hits: 1)
+-  runtime IC 4528 -> Item 128: Line (location: (source ID: 36, lines: 136..137, bytes: 4693..4706), hits: 1)
+-  runtime IC 4528 -> Item 129: Statement (location: (source ID: 36, lines: 136..137, bytes: 4693..4706), hits: 1)
+-  runtime IC 4535 -> Item 130: Line (location: (source ID: 36, lines: 137..138, bytes: 4716..4756), hits: 1)
+-  runtime IC 4535 -> Item 131: Statement (location: (source ID: 36, lines: 137..138, bytes: 4716..4756), hits: 1)
+-  runtime IC 4618 -> Item 132: Line (location: (source ID: 36, lines: 138..139, bytes: 4766..4793), hits: 1)
+-  runtime IC 4618 -> Item 133: Statement (location: (source ID: 36, lines: 138..139, bytes: 4766..4793), hits: 1)
+-  runtime IC 4706 -> Item 134: Line (location: (source ID: 36, lines: 139..140, bytes: 4803..4874), hits: 1)
+-  runtime IC 4706 -> Item 135: Statement (location: (source ID: 36, lines: 139..140, bytes: 4803..4874), hits: 1)
+-  runtime IC 4869 -> Item 136: Line (location: (source ID: 36, lines: 140..141, bytes: 4884..4916), hits: 1)
+-  runtime IC 4869 -> Item 137: Statement (location: (source ID: 36, lines: 140..141, bytes: 4884..4916), hits: 1)
+-  runtime IC 4910 -> Item 138: Line (location: (source ID: 36, lines: 141..142, bytes: 4926..4957), hits: 1)
+-  runtime IC 4910 -> Item 139: Statement (location: (source ID: 36, lines: 141..142, bytes: 4926..4957), hits: 1)
+-  runtime IC 388 -> Item 140: Line (location: (source ID: 36, lines: 144..147, bytes: 4970..5063), hits: 1)
+-  runtime IC 388 -> Item 141: Function "findLength" (location: (source ID: 36, lines: 144..147, bytes: 4970..5063), hits: 1)
+-  runtime IC 1472 -> Item 142: Line (location: (source ID: 36, lines: 145..146, bytes: 5034..5056), hits: 1)
+-  runtime IC 1472 -> Item 143: Statement (location: (source ID: 36, lines: 145..146, bytes: 5034..5056), hits: 1)
+

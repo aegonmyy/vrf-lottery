@@ -6,9 +6,6 @@ import {console} from "forge-std/console.sol";
 import {Script} from "forge-std/Script.sol";
 
 contract deploy is Script {
-    uint256 subId;
-    address vrfCoordinator;
-
     function run() external {
         uint256 subId = vm.envUint("_subscriptionId");
         address coord = vm.envAddress("_coordinator");
