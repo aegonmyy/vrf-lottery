@@ -8,6 +8,7 @@ import {Script} from "forge-std/Script.sol";
 contract deploy is Script {
     function run() external {
         uint256 subId = vm.envUint("_subscriptionId");
+        uint256 interval = 30 minutes;
         address coord = vm.envAddress("_coordinator");
         bytes32 hash = vm.envBytes32("_keyHash");
         uint256 fee = 0.01 ether;
@@ -15,6 +16,7 @@ contract deploy is Script {
         RandomWinnerPicker picker = new RandomWinnerPicker(
             subId,
             fee,
+            interval,
             coord,
             hash
         );

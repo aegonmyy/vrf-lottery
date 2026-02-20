@@ -53,9 +53,11 @@ contract RandomWinnerPicker is
     constructor(
         uint256 _subscriptionId,
         uint256 _fee,
+        uint256 _interval,
         address _coordinatorAddress,
         bytes32 _keyHash
     ) VRFConsumerBaseV2Plus(_coordinatorAddress) {
+        interval = _interval;
         keyHash = _keyHash;
         i_entranceFee = _fee;
         subscriptionId = _subscriptionId;
